@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'json'
 
 module RestoreStrategies
   # General response error class
@@ -9,6 +10,12 @@ module RestoreStrategies
 
       @response = response
       super(message)
+    end
+
+    def messages
+      JSON.parse(
+        @response.response.body
+      )['collection']['error']['message'].split(',')
     end
   end
 
