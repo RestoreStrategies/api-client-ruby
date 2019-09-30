@@ -11,6 +11,7 @@ module RestoreStrategies
                   :subscription_id, :plan_id, :addon_id, :plan_level,
                   :created_at, :updated_at, :telephone, :reseller_id,
                   :auto_approve_orgs, :cities
+    attr_reader :organization_id
 
     @path = '/api/admin/users'
     validates :given_name, :family_name, :church, :website, :street_address,

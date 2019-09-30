@@ -16,7 +16,7 @@ module RestoreStrategies
                   :organization_sfid, :organization_id, :group_types,
                   :municipalities, :closed, :items_committed, :items_given,
                   :max_items_needed, :instructions, :gift_question, :supplies,
-                  :cities
+                  :cities, :search_terms, :start_date, :end_date
 
     def initialize(json: nil, response: nil, **data)
       if json && response
@@ -50,7 +50,8 @@ module RestoreStrategies
                  :items_committed, :items_given, :max_items_needed, :ongoing,
                  :instructions, :gift_question, :level, :days, :times,
                  :group_types, :issues, :regions, :municipalities, :supplies,
-                 :cities, :coordinator, :status
+                 :cities, :coordinator, :status, :search_terms, :start_date,
+                 :end_date
     end
 
     def update(**data)
