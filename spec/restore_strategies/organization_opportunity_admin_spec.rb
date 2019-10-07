@@ -64,7 +64,8 @@ describe RestoreStrategies::OrganizationOpportunity do
       description: Faker::Hipster.paragraph(1, false, 2),
       issues: %w[Education Homelessness], type: 'Service',
       group_types: %w[Family Group], municipalities: %w[Round Rock Hyde Park],
-      organization_id: 662
+      organization_id: 662,
+      max_items_needed: ''
     )
 
     expect(opp.save).to be true
@@ -79,6 +80,7 @@ describe RestoreStrategies::OrganizationOpportunity do
       opp.update(
         type: type,
         municipalities: ['Waco'],
+        max_items_needed: 88,
         coordinator: {
           id: opp.coordinator.id,
           telephone: telephone

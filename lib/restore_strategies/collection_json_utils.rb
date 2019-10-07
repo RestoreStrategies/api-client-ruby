@@ -10,7 +10,11 @@ module RestoreStrategies
       data = []
 
       postable.post_fields.each do |field|
-        if postable.respond_to?(field) && !postable.send(field).nil?
+        value_is_present = postable.respond_to?(field) &&
+                           !postable.send(field).nil? &&
+                           !postable.send(field).blank?
+
+        if value_is_present
           data.push(build_element(field.id2name, postable.send(field)))
         end
       end
