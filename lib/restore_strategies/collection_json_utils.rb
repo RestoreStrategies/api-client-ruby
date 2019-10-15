@@ -10,11 +10,7 @@ module RestoreStrategies
       data = []
 
       postable.post_fields.each do |field|
-        value_is_present = postable.respond_to?(field) &&
-                           !postable.send(field).nil? &&
-                           !postable.send(field).blank?
-
-        if value_is_present
+        if value_is_present? postable, field
           data.push(build_element(field.id2name, postable.send(field)))
         end
       end
@@ -36,6 +32,22 @@ module RestoreStrategies
 
     def self.parse_element(json)
       { json['name'].underscore => json['value'] }
+    end
+
+    private_class_method
+
+    def self.value_is_present?(obj, field)
+      if !obj.respond_to?(field) # doesn't respond to field
+        false
+      elsif obj.send(field).nil? # value is nil
+        false
+      elsif obj.send(field).class == FalseClass # value is false
+        true
+      elsif obj.send(field).present? # value is present
+        true
+      else
+        false
+      end
     end
   end
 

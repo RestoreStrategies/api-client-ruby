@@ -72,6 +72,21 @@ describe RestoreStrategies::OrganizationOpportunity do
     expect(opp.id.to_i > 0).to be true
   end
 
+  it 'can create a one-time opportunity' do
+    opp = build(
+      :opportunity,
+      organization_id: 662,
+      ongoing: false,
+      coordinator: RestoreStrategies::OrganizationPerson.new(
+        given_name: Faker::Name.first_name, family_name: Faker::Name.last_name,
+        email: Faker::Internet.email, telephone: Faker::PhoneNumber.phone_number
+      )
+    )
+
+    expect(opp.save).to be true
+    expect(opp.ongoing).to be false
+  end
+
   it 'updates an opportunity' do
     opp = user.opportunities.where(id: '1').first
     type = %w[Service Event Gift].sample
