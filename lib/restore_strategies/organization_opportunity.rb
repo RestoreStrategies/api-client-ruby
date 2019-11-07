@@ -5,9 +5,9 @@ module RestoreStrategies
   class OrganizationOpportunity < ApiCollectable
     include RestoreStrategies::Updateable
 
-    validates :name, :regions, :times, :coordinator, :status, :days,
-              :level, :description, :issues, :type, :organization_id,
-              :group_types, :municipalities, presence: true
+    validates :name, :type, :description, :cities, :level, :days, :times,
+              :group_types, :issues, :regions, :status, :coordinator,
+              :organization_id, presence: true
 
     validates_inclusion_of :ongoing, in: [true, false]
 
@@ -16,7 +16,7 @@ module RestoreStrategies
                   :organization_sfid, :organization_id, :group_types,
                   :municipalities, :closed, :items_committed, :items_given,
                   :max_items_needed, :instructions, :gift_question, :supplies,
-                  :cities, :search_terms, :start_date, :end_date
+                  :cities, :search_terms, :start_date, :end_date, :active
 
     def initialize(json: nil, response: nil, **data)
       if json && response
@@ -51,7 +51,7 @@ module RestoreStrategies
                  :instructions, :gift_question, :level, :days, :times,
                  :group_types, :issues, :regions, :municipalities, :supplies,
                  :cities, :coordinator, :status, :search_terms, :start_date,
-                 :end_date
+                 :end_date, :active
     end
 
     def update(**data)
