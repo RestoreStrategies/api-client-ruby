@@ -5,9 +5,9 @@ module RestoreStrategies
   class OrganizationOpportunity < ApiCollectable
     include RestoreStrategies::Updateable
 
-    validates :name, :type, :description, :cities, :level, :days, :times,
-              :group_types, :issues, :regions, :status, :coordinator,
-              :organization_id, presence: true
+    validates :name, :type, :description, :cities, :days, :times, :group_types,
+              :issues, :regions, :status, :coordinator, :organization_id,
+              presence: true
 
     validates_inclusion_of :ongoing, in: [true, false]
 
