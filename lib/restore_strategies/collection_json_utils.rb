@@ -43,6 +43,8 @@ module RestoreStrategies
         false
       elsif obj.send(field).class == FalseClass # value is false
         true
+      elsif obj.send(field).class == Array # value is Array
+        true
       elsif obj.send(field).present? # value is present
         true
       else
